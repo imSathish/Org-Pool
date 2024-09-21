@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
@@ -33,12 +34,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -48,6 +47,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.orgcarpool.R
 import com.example.orgcarpool.core.theme.background
 import com.example.orgcarpool.data.remote.response.TripList
 import com.example.orgcarpool.features.create.CreateTripRoute
@@ -63,7 +63,8 @@ fun DashboardRoute(
     val dashboardUiState by dashboardViewModel.dashboardState.collectAsState()
 
     DashboardScreen(
-        isLoading = dashboardUiState.isLoading
+        isLoading = dashboardUiState.isLoading,
+        upComingTrips = dashboardUiState.upComingTrips
     )
 }
 
@@ -71,7 +72,8 @@ fun DashboardRoute(
 @Composable
 private fun DashboardScreenPreview() {
     DashboardScreen(
-        isLoading = true
+        isLoading = true,
+        upComingTrips = listOf()
     )
 }
 
@@ -79,6 +81,7 @@ private fun DashboardScreenPreview() {
 fun DashboardScreen(
     isLoading: Boolean,
     modifier: Modifier = Modifier,
+    upComingTrips: List<TripList.Trip>,
 ) {
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { 3 })
     val scope = rememberCoroutineScope()
@@ -88,6 +91,9 @@ fun DashboardScreen(
             .fillMaxSize()
             .background(color = background)
     ) {
+        if (isLoading){
+            CommonLoader()
+        }
         Spacer(
             modifier = Modifier.statusBarsPadding()
         )
@@ -98,7 +104,9 @@ fun DashboardScreen(
         ) { currentPage ->
             when (currentPage) {
                 0 -> {
-                    HomeScreen()
+                    HomeScreen(
+                        upComingTrips = upComingTrips
+                    )
                 }
 
                 1 -> {
@@ -237,11 +245,13 @@ fun DashboardScreen(
 @Preview
 @Composable
 private fun HomeScreenPreview() {
-    HomeScreen()
+    HomeScreen(
+        upComingTrips = listOf()
+    )
 }
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(modifier: Modifier = Modifier,upComingTrips: List<TripList.Trip>,) {
     Column(
         modifier = modifier
     ) {
@@ -322,25 +332,31 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                 color = Color(0xFF6191ED)
             )
         }
-
         LazyColumn {
-            items(10) {
+            items(upComingTrips) { trips ->
                 UpComingRideCardComponent(
-                    tripDetails = TripList.Trip(
-                        car = "Kia-2024",
-                        from = "Thambaram",
-                        to = "Sholinganallur",
-                        time = "6:00 PM",
-                        totalSeats = 5,
-                        remainingSeats = 3,
-                        owner = "Syed",
-                        date = "Today",
-                        filled = 2,
-                        tripName = "Office",
-                    )
+                    tripDetails = trips
                 )
             }
         }
+//        LazyColumn {
+//            items(10) {
+//                UpComingRideCardComponent(
+//                    tripDetails = TripList.Trip(
+//                        car = "Kia-2024",
+//                        from = "Thambaram",
+//                        to = "Sholinganallur",
+//                        time = "6:00 PM",
+//                        totalSeats = 5,
+//                        remainingSeats = 3,
+//                        owner = "Syed",
+//                        date = "Today",
+//                        filled = 2,
+//                        tripName = "Office",
+//                    )
+//                )
+//            }
+//        }
         Spacer(modifier = Modifier.padding(10.dp))
     }
 }
@@ -382,12 +398,14 @@ fun UpComingRideCardComponent(
         Box(
             modifier = Modifier.fillMaxWidth()
         ) {
-//            Image(
-//                painter = painterResource(R.drawable.ic_map_background),
-//                contentDescription = "",
-//                modifier = Modifier.matchParentSize(),
-//                contentScale = ContentScale.Crop
-//            )
+            Image(
+                painter = painterResource(R.drawable.ic_mp_background),
+                contentDescription = "",
+                modifier = Modifier
+                    .matchParentSize()
+                    .shadow(10.dp, ambientColor = Color.Black),
+                contentScale = ContentScale.Crop
+            )
             Row(
                 modifier = modifier
                     .fillMaxWidth()
@@ -428,7 +446,6 @@ fun UpComingRideCardComponent(
                             ) {
                                 Icon(
                                     Icons.Default.Person,
-                                    tint = Color.LightGray,
                                     contentDescription = "",
                                     modifier = Modifier.size(18.dp)
                                 )
@@ -441,7 +458,6 @@ fun UpComingRideCardComponent(
                                 )
                                 Icon(
                                     Icons.Default.LocationOn,
-                                    tint = Color.LightGray,
                                     contentDescription = "",
                                     modifier = Modifier.size(18.dp)
                                 )
