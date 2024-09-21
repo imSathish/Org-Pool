@@ -2,18 +2,18 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlinSerialization)
-//    alias(libs.plugins.kspPlugin)
-//    alias(libs.plugins.hiltPlugin)
+    alias(libs.plugins.kspPlugin)
+    alias(libs.plugins.hiltPlugin)
 }
 
 android {
     namespace = "com.example.orgcarpool"
-    compileSdk = 34
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.example.orgcarpool"
-        minSdk = 24
-        targetSdk = 34
+        minSdk = libs.versions.android.minSdk.get().toInt()
+        targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -65,12 +65,19 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
 
-    //Hilt
-    //Dagger-Hilt
-//    implementation(libs.dagger.hilt)
-//    ksp(libs.dagger.hilt.compiler)
-//    ksp(libs.dagger.hilt.androidx)
-//    implementation(libs.dagger.hilt.navigation)
+//    Hilt
+//    Dagger-Hilt
+    implementation(libs.dagger.hilt)
+    ksp(libs.dagger.hilt.compiler)
+    ksp(libs.dagger.hilt.androidx)
+    implementation(libs.dagger.hilt.navigation)
+
+    implementation(platform(libs.ktor.bom))
+    implementation(libs.ktor.android)
+    implementation(libs.ktor.client.serialization)
+    implementation(libs.ktor.client.logging)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.serialization.kotlinx.json)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

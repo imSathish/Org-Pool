@@ -1,4 +1,4 @@
-package com.example.orgcarpool.data
+package com.example.orgcarpool.data.remote.response
 
 
 import kotlinx.serialization.SerialName
