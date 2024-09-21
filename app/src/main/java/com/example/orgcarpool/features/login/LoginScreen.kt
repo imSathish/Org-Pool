@@ -55,7 +55,7 @@ fun LoginScreen(
                 email = it
             })
             Button(modifier = Modifier.padding(4.dp), onClick = {
-                viewmodel.login(name, email)
+               navController.navigate(NavigationRoute.DashboardScreen)
             }) {
                 Text("Login / Sign Up")
             }
