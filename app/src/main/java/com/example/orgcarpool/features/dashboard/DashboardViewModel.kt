@@ -8,7 +8,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class DashboardViewModel @Inject constructor(private val apiService: ApiService) : ViewModel() {
+class DashboardViewModel @Inject constructor(
+    private val apiService: ApiService
+) : ViewModel() {
 
     private var _dashboardState = MutableStateFlow(DashboardState())
     val dashboardState = _dashboardState.asStateFlow()

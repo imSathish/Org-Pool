@@ -14,16 +14,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.orgcarpool.core.theme.background
 
 @Composable
-fun DashboardRoute(modifier: Modifier = Modifier) {
-    val dashboardViewModel = DashboardViewModel()
+fun DashboardRoute(
+    modifier: Modifier = Modifier,
+    dashboardViewModel: DashboardViewModel = hiltViewModel()
+) {
+//    val dashboardViewModel = DashboardViewModel()
 
     val dashboardUiState by dashboardViewModel.dashboardState.collectAsState()
 
     DashboardScreen(
-        isLoading  = dashboardUiState.isLoading
+        isLoading = dashboardUiState.isLoading
     )
 }
 
@@ -37,7 +41,7 @@ private fun DashboardScreenPreview() {
 
 @Composable
 fun DashboardScreen(
-    isLoading : Boolean,
+    isLoading: Boolean,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -45,9 +49,9 @@ fun DashboardScreen(
             .fillMaxSize()
             .background(color = background)
     ) {
-        Row (
+        Row(
 
-        ){
+        ) {
 
         }
     }
