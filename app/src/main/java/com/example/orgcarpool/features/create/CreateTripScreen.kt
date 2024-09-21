@@ -95,7 +95,11 @@ fun CreateTripScreen(
                 },
                 actions = {
                     TextButton(onClick = { onSaveClick() }) {
-                        Text(text = "Save", color = Color.Black)
+                        Text(
+                            text = "Save",
+                            color = Color.Black,
+                            fontSize = 16.sp
+                        )
                     }
                 }
             )
@@ -273,10 +277,12 @@ fun DestinationCompose() {
             TimePickerDialog(
                 LocalContext.current,
                 { _, selectedHour, selectedMinute ->
-                    startTime = String.format("%02d:%02d %s",
+                    startTime = String.format(
+                        "%02d:%02d %s",
                         if (selectedHour > 12) selectedHour - 12 else selectedHour,
                         selectedMinute,
-                        if (selectedHour >= 12) "PM" else "AM")
+                        if (selectedHour >= 12) "PM" else "AM"
+                    )
                 },
                 hour,
                 minute,
@@ -293,10 +299,12 @@ fun DestinationCompose() {
             TimePickerDialog(
                 LocalContext.current,
                 { _, selectedHour, selectedMinute ->
-                    endTime = String.format("%02d:%02d %s",
+                    endTime = String.format(
+                        "%02d:%02d %s",
                         if (selectedHour > 12) selectedHour - 12 else selectedHour,
                         selectedMinute,
-                        if (selectedHour >= 12) "PM" else "AM")
+                        if (selectedHour >= 12) "PM" else "AM"
+                    )
                 },
                 hour,
                 minute,
