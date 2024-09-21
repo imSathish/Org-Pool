@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -87,6 +88,9 @@ fun DashboardScreen(
             .fillMaxSize()
             .background(color = background)
     ) {
+        Spacer(
+            modifier = Modifier.statusBarsPadding()
+        )
         HorizontalPager(
             state = pagerState,
             userScrollEnabled = false,
@@ -98,7 +102,18 @@ fun DashboardScreen(
                 }
 
                 1 -> {
-                    CreateTripRoute()
+                    CreateTripRoute(
+                        onBackClick = {
+                            scope.launch {
+                                pagerState.animateScrollToPage(0)
+                            }
+                        },
+                        onSaveClick = {
+                            scope.launch {
+                                pagerState.animateScrollToPage(0)
+                            }
+                        }
+                    )
                 }
 
                 2 -> {
@@ -123,7 +138,10 @@ fun DashboardScreen(
                         scope.launch {
                             pagerState.animateScrollToPage(1)
                         }
-                    }
+                    },
+                    colors = CardDefaults.cardColors(
+                        containerColor = if(pagerState.currentPage == 0) Color(0xFF6191ED) else Color.Transparent
+                    )
                 ) {
                     Column(
                         modifier = Modifier
@@ -138,24 +156,25 @@ fun DashboardScreen(
                     ) {
                         Icon(
                             Icons.Default.Home,
-                            tint = Color.Black,
-                            contentDescription = "Home"
+                            tint = if(pagerState.currentPage == 0) Color.White else Color.Black,
+                            contentDescription = "Home",
+                            modifier = Modifier.size(18.dp)
                         )
                         Text(
                             text = "Home",
-                            fontWeight = FontWeight.SemiBold,
+                            fontWeight = FontWeight.Medium,
                         )
-
                     }
                 }
-
-
                 Card(
                     onClick = {
                         scope.launch {
                             pagerState.animateScrollToPage(1)
                         }
-                    }
+                    },
+                    colors = CardDefaults.cardColors(
+                        containerColor = if(pagerState.currentPage == 1) Color(0xFF6191ED) else Color.Transparent
+                    )
                 ) {
                     Column(
                         modifier = Modifier
@@ -170,12 +189,13 @@ fun DashboardScreen(
                     ) {
                         Icon(
                             Icons.Default.Add,
-                            tint = Color.Black,
-                            contentDescription = "Home"
+                            tint = if(pagerState.currentPage == 1) Color.White else Color.Black,
+                            contentDescription = "Home",
+                            modifier = Modifier.size(18.dp)
                         )
                         Text(
                             text = "Create",
-                            fontWeight = FontWeight.SemiBold,
+                            fontWeight = FontWeight.Medium,
                         )
                     }
                 }
@@ -185,7 +205,10 @@ fun DashboardScreen(
                         scope.launch {
                             pagerState.animateScrollToPage(2)
                         }
-                    }
+                    },
+                    colors = CardDefaults.cardColors(
+                        containerColor = if(pagerState.currentPage == 2) Color(0xFF6191ED) else Color.Transparent
+                    )
                 ) {
                     Column(
                         modifier = Modifier
@@ -195,12 +218,13 @@ fun DashboardScreen(
                     ) {
                         Icon(
                             Icons.Default.Person,
-                            tint = Color.Black,
-                            contentDescription = "Home"
+                            tint = if(pagerState.currentPage == 2) Color.White else Color.Black,
+                            contentDescription = "Home",
+                            modifier = Modifier.size(18.dp)
                         )
                         Text(
                             text = "Profile",
-                            fontWeight = FontWeight.SemiBold,
+                            fontWeight = FontWeight.Medium,
                         )
                     }
                 }
