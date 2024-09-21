@@ -1,5 +1,6 @@
 package com.example.orgcarpool.features
 
+import LoginScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class BaseActivity : ComponentActivity() {
 
-    private var isUserLoggedIn : Boolean = true
+    private var isUserLoggedIn : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +28,8 @@ class BaseActivity : ComponentActivity() {
         setContent {
             OrgCarPoolTheme {
                 NavigationGraph(
-                    startDestination = if(isUserLoggedIn) NavigationRoute.DashboardScreen else NavigationRoute.SplashScreen
+//                    startDestination = if(isUserLoggedIn) NavigationRoute.DashboardScreen else NavigationRoute.SplashScreen
+                    startDestination = NavigationRoute.LoginScreen
                 )
             }
         }
@@ -59,11 +61,11 @@ fun NavigationGraph(
         },
     ){
         composable<NavigationRoute.SplashScreen> {
-
+            LoginScreen(navController = navController)
         }
 
         composable<NavigationRoute.LoginScreen> {
-
+            LoginScreen(navController = navController)
         }
 
         composable<NavigationRoute.DashboardScreen> {
