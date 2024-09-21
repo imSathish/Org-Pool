@@ -13,32 +13,44 @@ import com.example.orgcarpool.core.navigation.NavigationRoute
 import com.example.orgcarpool.core.theme.OrgCarPoolTheme
 
 class BaseActivity : ComponentActivity() {
+
+    private var isUserLoggedIn : Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             OrgCarPoolTheme {
                 NavigationGraph(
+                    startDestination = if(isUserLoggedIn) NavigationRoute.DashboardScreen else NavigationRoute.SplashScreen
                 )
             }
         }
     }
+
 }
 
 @Composable
 fun NavigationGraph(
+    startDestination : NavigationRoute,
     modifier: Modifier = Modifier
 ) {
     val navController = rememberNavController()
 
     NavHost(
         navController = navController,
-        startDestination = NavigationRoute.SplashScreen
+        startDestination = startDestination
     ){
-        composable<NavigationRoute.SplashScreen> {  }
+        composable<NavigationRoute.SplashScreen> {
 
-        composable<NavigationRoute.LoginScreen> {  }
+        }
 
-        composable<NavigationRoute.DashboardScreen> {  }
+        composable<NavigationRoute.LoginScreen> {
+
+        }
+
+        composable<NavigationRoute.DashboardScreen> {
+
+        }
     }
 }
