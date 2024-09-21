@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.DatePicker
@@ -20,7 +19,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SelectableDates
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -36,15 +34,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextLayoutInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.orgcarpool.R
-import com.example.orgcarpool.core.theme.background
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -203,17 +198,15 @@ fun TripNameCompose() {
 @Composable
 fun DestinationCompose() {
     Column(modifier = Modifier.padding(top = 10.dp, bottom = 10.dp)) {
-        Text(text = "Destination & Schedule", fontSize = 24.sp)
+        Text(text = "Schedule", fontSize = 24.sp)
 
         Box(
             modifier = Modifier
-                .padding(bottom = 20.dp)
+                .padding(bottom = 20.dp, top = 20.dp)
                 .background(color = Color(0xFFEFEFEF), shape = RoundedCornerShape(20.dp))
                 .padding(16.dp)
         ) {
-
             Column {
-
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
