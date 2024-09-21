@@ -10,9 +10,10 @@ data class TripList(
 ) {
     @Serializable
     data class Trip(
+        @SerialName("tripName") val tripName: String,
         @SerialName("car") val car: String,
         @SerialName("date") val date: String,
-        @SerialName("filled") val filled: Boolean,
+        @SerialName("filled") val filled: Int,
         @SerialName("from") val from: String,
         @SerialName("owner") val owner: String,
         @SerialName("time") val time: String,

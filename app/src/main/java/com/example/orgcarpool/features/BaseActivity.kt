@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
@@ -11,6 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.orgcarpool.core.navigation.NavigationRoute
 import com.example.orgcarpool.core.theme.OrgCarPoolTheme
+import com.example.orgcarpool.features.dashboard.DashboardRoute
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,7 +44,19 @@ fun NavigationGraph(
 
     NavHost(
         navController = navController,
-        startDestination = startDestination
+        startDestination = startDestination,
+        enterTransition = {
+            slideIntoContainer(
+                AnimatedContentTransitionScope.SlideDirection.Left,
+                tween(500)
+            )
+        },
+        popEnterTransition = {
+            slideIntoContainer(
+                AnimatedContentTransitionScope.SlideDirection.Right,
+                tween(500)
+            )
+        },
     ){
         composable<NavigationRoute.SplashScreen> {
 
@@ -52,7 +67,7 @@ fun NavigationGraph(
         }
 
         composable<NavigationRoute.DashboardScreen> {
-
+            DashboardRoute()
         }
     }
 }
