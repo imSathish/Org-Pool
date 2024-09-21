@@ -19,5 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "OrgPool"
+rootProject.name = "OrgCarPool"
 include(":app")
+ 
