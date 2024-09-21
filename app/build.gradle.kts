@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlinSerialization)
+//    alias(libs.plugins.kspPlugin)
+//    alias(libs.plugins.hiltPlugin)
 }
 
 android {
@@ -62,6 +64,13 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
+
+    //Hilt
+    //Dagger-Hilt
+//    implementation(libs.dagger.hilt)
+//    ksp(libs.dagger.hilt.compiler)
+//    ksp(libs.dagger.hilt.androidx)
+//    implementation(libs.dagger.hilt.navigation)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
