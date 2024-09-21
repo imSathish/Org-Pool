@@ -308,9 +308,10 @@ fun HomeScreen(modifier: Modifier = Modifier,upComingTrips: List<TripList.Trip>,
                 remainingSeats = 3,
                 owner = "Syed",
                 date = "Today",
-                filled = 2,
-                tripName = "Office",
-            )
+                filled = 2
+            ).also {
+                it.tripName = "Office"
+            }
         )
 
         Row(
@@ -375,8 +376,9 @@ private fun UpComingRideCardComponentPreview() {
             owner = "Syed",
             date = "Today",
             filled = 2,
-            tripName = "Office"
-        )
+        ).also {
+            it.tripName = "Office"
+        }
     )
 }
 

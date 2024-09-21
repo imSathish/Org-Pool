@@ -10,15 +10,16 @@ data class TripList(
 ) {
     @Serializable
     data class Trip(
-        @SerialName("tripName") val tripName: String,
         @SerialName("car") val car: String,
         @SerialName("date") val date: String,
         @SerialName("filled") val filled: Int,
-        @SerialName("from") val from: String,
+        @SerialName("fromDestination") val from: String,
         @SerialName("owner") val owner: String,
         @SerialName("time") val time: String,
-        @SerialName("to") val to: String,
-        @SerialName("total_seats") val totalSeats: Int,
-        @SerialName("remaining_seats") val remainingSeats : Int,
-    )
+        @SerialName("toDestination") val to: String,
+        @SerialName("totalSeats") val totalSeats: Int,
+        val remainingSeats : Int = totalSeats - filled
+    ) {
+        var tripName = "Default trip"
+    }
 }
