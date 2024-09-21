@@ -11,7 +11,7 @@ class ApiService constructor(private val client: HttpClient) {
 
     companion object {
         private const val END_POINT =
-            "https://fd9a-49-249-171-190.ngrok-free.app/"
+            "https://fd9a-49-249-171-190.ngrok-free.app"
     }
 
     suspend fun getTrips(): List<TripList.Trip> = client.get(END_POINT).body()
