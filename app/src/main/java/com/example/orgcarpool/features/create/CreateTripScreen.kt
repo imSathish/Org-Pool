@@ -1,5 +1,6 @@
 package com.example.orgcarpool.features.create
 
+import android.app.TimePickerDialog
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -43,6 +44,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.orgcarpool.R
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 
 @Composable
@@ -100,7 +102,11 @@ fun CreateTripScreen(
                         onSaveClick()
                         Toast.makeText(context,"Trip Added",Toast.LENGTH_SHORT).show()
                     }) {
-                        Text(text = "Save", color = Color.Black)
+                        Text(
+                            text = "Save",
+                            color = Color.Black,
+                            fontSize = 16.sp
+                        )
                     }
                 }
             )
@@ -161,12 +167,11 @@ fun TripNameCompose() {
 
             Text(text = "Trip Date", fontSize = 18.sp, color = Color.Black)
 
-            // Clickable text to open the date picker
             Text(
                 text = tripDate,
                 modifier = Modifier
                     .padding(top = 8.dp)
-                    .clickable { showDatePicker = true }, // Open date picker on click
+                    .clickable { showDatePicker = true },
                 color = Color.Blue,
                 fontSize = 16.sp
             )
@@ -205,6 +210,11 @@ fun TripNameCompose() {
 
 @Composable
 fun DestinationCompose() {
+    var startTime by remember { mutableStateOf("10:00 AM") }
+    var endTime by remember { mutableStateOf("11:00 AM") }
+    var showStartTimePicker by remember { mutableStateOf(false) }
+    var showEndTimePicker by remember { mutableStateOf(false) }
+
     Column(modifier = Modifier.padding(top = 10.dp, bottom = 10.dp)) {
         Text(text = "Schedule", fontSize = 24.sp)
 
@@ -215,10 +225,12 @@ fun DestinationCompose() {
                 .padding(16.dp)
         ) {
             Column {
+                // Start Time Row
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 16.dp),
+                        .padding(top = 16.dp)
+                        .clickable { showStartTimePicker = true },
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
@@ -231,7 +243,8 @@ fun DestinationCompose() {
                     Spacer(modifier = Modifier.weight(1f))
 
                     Text(
-                        text = "10:00 AM", fontSize = 18.sp,
+                        text = startTime,
+                        fontSize = 18.sp,
                         color = Color.Black
                     )
                 }
@@ -241,7 +254,8 @@ fun DestinationCompose() {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 16.dp),
+                        .padding(top = 16.dp)
+                        .clickable { showEndTimePicker = true },
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
@@ -254,18 +268,57 @@ fun DestinationCompose() {
                     Spacer(modifier = Modifier.weight(1f))
 
                     Text(
-                        text = "11:00 AM", fontSize = 18.sp,
+                        text = endTime,
+                        fontSize = 18.sp,
                         color = Color.Black
                     )
                 }
-
-
             }
-
-
         }
 
+        if (showStartTimePicker) {
+            val calendar = Calendar.getInstance()
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            val minute = calendar.get(Calendar.MINUTE)
 
+            TimePickerDialog(
+                LocalContext.current,
+                { _, selectedHour, selectedMinute ->
+                    startTime = String.format(
+                        "%02d:%02d %s",
+                        if (selectedHour > 12) selectedHour - 12 else selectedHour,
+                        selectedMinute,
+                        if (selectedHour >= 12) "PM" else "AM"
+                    )
+                },
+                hour,
+                minute,
+                false
+            ).show()
+            showStartTimePicker = false
+        }
+
+        if (showEndTimePicker) {
+            val calendar = Calendar.getInstance()
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            val minute = calendar.get(Calendar.MINUTE)
+
+            TimePickerDialog(
+                LocalContext.current,
+                { _, selectedHour, selectedMinute ->
+                    endTime = String.format(
+                        "%02d:%02d %s",
+                        if (selectedHour > 12) selectedHour - 12 else selectedHour,
+                        selectedMinute,
+                        if (selectedHour >= 12) "PM" else "AM"
+                    )
+                },
+                hour,
+                minute,
+                false
+            ).show()
+            showEndTimePicker = false
+        }
     }
 }
 
