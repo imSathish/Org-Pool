@@ -46,7 +46,7 @@ fun DashboardScreen(
             .background(color = background)
     ) {
         Row (
-            mo
+
         ){
 
         }
