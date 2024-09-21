@@ -12,11 +12,12 @@ data class TripList(
     data class Trip(
         @SerialName("car") val car: String,
         @SerialName("date") val date: String,
-        @SerialName("filled") val filled: Int,
+        @SerialName("filled") val filled: Boolean,
         @SerialName("from") val from: String,
-        @SerialName("owner") val owner: Int,
+        @SerialName("owner") val owner: String,
         @SerialName("time") val time: String,
         @SerialName("to") val to: String,
-        @SerialName("total_seats") val totalSeats: Int
+        @SerialName("total_seats") val totalSeats: Int,
+        @SerialName("remaining_seats") val remainingSeats : Int,
     )
 }
