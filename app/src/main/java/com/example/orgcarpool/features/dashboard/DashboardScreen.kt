@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.orgcarpool.core.theme.background
-import com.example.orgcarpool.data.TripList
+import com.example.orgcarpool.data.remote.response.TripList
 
 @Composable
 fun DashboardRoute(
@@ -66,13 +66,13 @@ fun DashboardScreen(
             .fillMaxSize()
             .background(color = background)
     ) {
-        Row (
+        Row(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(20.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
-        ){
+        ) {
             Card(
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 elevation = CardDefaults.elevatedCardElevation(10.dp),
@@ -127,7 +127,7 @@ private fun UpComingRideCardComponentPreview() {
 @Composable
 fun UpComingRideCardComponent(
     modifier: Modifier = Modifier,
-    tripDetails : TripList.Trip
+    tripDetails: TripList.Trip
 ) {
     Card(
         modifier = Modifier.padding(10.dp)
@@ -153,19 +153,19 @@ fun UpComingRideCardComponent(
                         .padding(10.dp)
                 )
             }
-            Column (
+            Column(
                 modifier = Modifier
                     .weight(1f),
-            ){
-                Row (
+            ) {
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(10.dp)
-                ){
+                ) {
                     Column {
-                    Text(
-                        text = tripDetails
-                    )
+                        Text(
+                            text = tripDetails.car
+                        )
                     }
                 }
             }
