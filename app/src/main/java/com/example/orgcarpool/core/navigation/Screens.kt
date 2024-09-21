@@ -11,6 +11,7 @@ sealed class NavigationRoute{
     data object RootModule : NavigationRoute()
 
     //Splash
+    @Serializable
     data object SplashScreen : NavigationRoute()
 
     //LoginModule

@@ -9,7 +9,6 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
-gradle.properties
 gradlew.bat
 /build
 /captures

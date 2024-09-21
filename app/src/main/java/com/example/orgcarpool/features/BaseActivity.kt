@@ -11,7 +11,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.orgcarpool.core.navigation.NavigationRoute
 import com.example.orgcarpool.core.theme.OrgCarPoolTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BaseActivity : ComponentActivity() {
 
     private var isUserLoggedIn : Boolean = true

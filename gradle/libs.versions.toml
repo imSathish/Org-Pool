@@ -1,5 +1,8 @@
 [versions]
-agp = "8.6.0"
+agp = "8.5.1"
+android-compileSdk = "34"
+android-minSdk = "24"
+android-targetSdk = "34"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -10,11 +13,12 @@ activityCompose = "1.9.2"
 composeBom = "2024.04.01"
 navigationCompose = "2.8.1"
 kotlinx-serialization = "1.6.0"
+ktor-bom = "2.3.12"
 
 hilt = "2.51"
 androidx-hilt = "1.2.0"
 android-hilt = "2.51"
-android-ksp = "2.0.10-1.0.24"
+android-ksp = "1.9.0-1.0.13"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,6 +44,13 @@ dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref
 dagger-hilt-androidx = { module = "androidx.hilt:hilt-compiler", version.ref = "androidx-hilt" }
 dagger-hilt-navigation = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidx-hilt" }
 dagger-hilt-lifecycle = { module = "androidx.hilt:hilt-lifecycle-viewmodel", version.ref = "androidx-hilt" }
+
+ktor-bom = { group = "io.ktor", name = "ktor-bom", version.ref = "ktor-bom" }
+ktor-android = {group = "io.ktor", name = "ktor-client-android" }
+ktor-client-serialization = { group = "io.ktor", name = "ktor-client-serialization" }
+ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation" }
+ktor-serialization-kotlinx-json = {group = "io.ktor", name = "ktor-serialization-kotlinx-json"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
